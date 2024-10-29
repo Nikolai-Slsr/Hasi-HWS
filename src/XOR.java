@@ -1,6 +1,15 @@
 public class XOR extends Block{
     public boolean auswerten(){
-        throw new IllegalArgumentException();
+        if (inputs.get(0).equals(this) || inputs.get(1).equals(this) ){
+            throw new InfinityException("Infinite Loop");
+        }
+
+        if(inputs.get(0).auswerten() ^ inputs.get(1).auswerten()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public XOR() {

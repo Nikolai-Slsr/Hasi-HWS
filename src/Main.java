@@ -4,6 +4,7 @@ public class Main {
     private ArrayList<Block> outputs;
     private ArrayList<Block> blocks;
     private int ID = 0;
+    public int time = 0;
 
     public Main(){
         this.inputs = new ArrayList<Block>();

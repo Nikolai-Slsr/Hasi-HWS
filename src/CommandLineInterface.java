@@ -8,6 +8,7 @@ public class CommandLineInterface {
     public void start(){
         Scanner input = new Scanner(System.in);
         boolean running = true;
+        System.out.println("Welcome to the Command Line Interface of 'HASI Hardware Simulator!'" + "\n" + "For help type 'help'.");
         while(running){
             String Input = input.nextLine();
             String[] parts = Input.split(" ");
@@ -168,7 +169,8 @@ public class CommandLineInterface {
         String[] commands = {
             "Commands:",
             "add: adds a block, input, or output",
-            "  Usage: add <block|input|output> <name>",
+            "  Usage: add <block|input|output|connection> <name>",
+            "  Usage Connection: add connection <InputName> <OutputName>",
             "clear: clears all blocks, inputs, and outputs",
             "exit: exits the program",
             "help: prints this message",
@@ -177,7 +179,7 @@ public class CommandLineInterface {
             "rm: removes a block, input, or output",
             "  Usage: rm <block|input|output> <name>",
             "run: runs the program",
-            "setStateInput: sets the state of an input",
+            "setInput: sets the state of an input",
             "  Usage: setStateInput <inputName> <true|false>"
         };
 
