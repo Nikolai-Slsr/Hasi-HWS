@@ -1,5 +1,14 @@
-public class XOR {
+public class XOR extends Block{
     public boolean auswerten(){
-        return false;
+        throw new IllegalArgumentException();
+    }
+
+    public XOR() {
+        numInputs = 2;
+    }
+
+    @Override
+    public void setState(boolean state) {
+
     }
 }
