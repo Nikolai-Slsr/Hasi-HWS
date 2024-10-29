@@ -31,7 +31,7 @@ public class CommandLineInterface {
                     setStateInput(parts,main);
                     break;
                 case "help":
-                    help();
+                    displayHelp();
                     break;
                 case "clear":
                     clear();
@@ -133,6 +133,23 @@ public class CommandLineInterface {
         }
     }
     private void rm(String[] parts, Main main){
+        String name = parts[0];
+        if (main.getIDFromName(name) == -1) {
+            System.out.println("Could not find block with name: " + name);
+            return;
+        }
+        if (main.getBlock(main.getIDFromName(name)) instanceof Input) {
+            main.rmInput(main.getBlock(main.getIDFromName(name)));
+            System.out.println("Removed input: " + name);
+            return;
+        }
+        if (main.getBlock(main.getIDFromName(name)) instanceof Output) {
+            main.rmOutput(main.getBlock(main.getIDFromName(name)));
+            System.out.println("Removed output: " + name);
+            return;
+        }
+        main.rmBlock(main.getBlock(main.getIDFromName(name)));
+        System.out.println("Removed block: " + name);
 
     }
     private void setStateInput(String[] argsIn, Main main){
@@ -147,21 +164,26 @@ public class CommandLineInterface {
             System.out.println("Could not set state: " + e.getMessage());
         }
     }
-    private void help(){
-        System.out.println("Commands:");
-        System.out.println("add: adds a block, input, or output");
-        System.out.println("  Usage: add <type> <name>");
-        System.out.println("  Example: add block MyBlock, add input MyInput, add output MyOutput");
-        System.out.println("clear: clears all blocks, inputs, and outputs");
-        System.out.println("exit: exits the program");
-        System.out.println("help: prints this message");
-        System.out.println("rm: removes a block, input, or output");
-        System.out.println("  Usage: rm <type> <name>");
-        System.out.println("  Example: rm block MyBlock, rm input MyInput, rm output MyOutput");
-        System.out.println("run: runs the program");
-        System.out.println("setStateInput: sets the state of an input");
-        System.out.println("  Usage: setStateInput <inputName> <state>");
-        System.out.println("  Example: setStateInput MyInput true, setStateInput MyInput false");
+    private void displayHelp() {
+        String[] commands = {
+            "Commands:",
+            "add: adds a block, input, or output",
+            "  Usage: add <block|input|output> <name>",
+            "clear: clears all blocks, inputs, and outputs",
+            "exit: exits the program",
+            "help: prints this message",
+            "list: lists all blocks, inputs, or outputs",
+            "  Usage: list <block|input|output>",
+            "rm: removes a block, input, or output",
+            "  Usage: rm <block|input|output> <name>",
+            "run: runs the program",
+            "setStateInput: sets the state of an input",
+            "  Usage: setStateInput <inputName> <true|false>"
+        };
+
+        for (String command : commands) {
+            System.out.println(command);
+        }
     }
     private void clear(){
         main.clear();
